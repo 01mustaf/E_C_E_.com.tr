@@ -1,67 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorldWeb - Haberler</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İyi ki Doğdun Ece 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #fccde2);
+      color: #333;
+      text-align: center;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #e60073;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    .message {
+      font-size: 1.4em;
+      max-width: 600px;
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 0, 98, 0.2);
+      border: 2px dashed #ff6fa1;
+    }
+    .btn {
+      background: #ff6fa1;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .btn:hover {
+      background: #e14d80;
+      transform: scale(1.05);
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .heart {
+      width: 15px;
+      height: 15px;
+      background: red;
+      position: absolute;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 15px;
+      height: 15px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before {
+      top: -7.5px;
+      left: 0;
+    }
+    .heart::after {
+      left: -7.5px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    #videoPage {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #000000, #1a001a);
+      min-height: 100vh;
+      color: white;
+      padding: 30px;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      border: 4px double #ff69b4;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+    }
+    .video-wrapper::before, .video-wrapper::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #ff69b4;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #fff;
+      animation: sparkle 2s infinite alternate;
+    }
+    .video-wrapper::before {
+      top: -15px;
+      left: -15px;
+    }
+    .video-wrapper::after {
+      bottom: -15px;
+      right: -15px;
+    }
+    @keyframes sparkle {
+      from { transform: scale(1); opacity: 0.7; }
+      to { transform: scale(1.3); opacity: 1; }
+    }
+    .video-wrapper iframe {
+      width: 100%;
+      height: 450px;
+      border-radius: 15px;
+      border: none;
+    }
+    .video-message {
+      margin-top: 30px;
+      font-size: 1.2em;
+      max-width: 600px;
+      text-shadow: 1px 1px 3px #000;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="logo">🌑 WorlWeb</div>
-    <nav>
-      <ul>
-        <li><a href="#">Ana Sayfa</a></li>
-        <li><a href="#">Dünya</a></li>
-        <li><a href="#">Ekonomi</a></li>
-        <li><a href="#">Teknoloji</a></li>
-        <li><a href="#">Spor</a></li>
-        <li><a href="#">İletişim</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section class="hero">
-      <h1>Dünya Haberleri Bir Tık Uzağınızda</h1>
-      <p>Son dakika haberlerini ve öne çıkan gelişmeleri takip edin.</p>
-      <a href="#featured" class="cta-button">Haberleri Görüntüle</a>
-    </section>
+  <div class="container" id="homePage">
+    <h1>İyi ki Doğdun Ece 🎉</h1>
+    <div class="message">
+      Ece, bazen bazı insanlar olur, seni sadece varlıklarıyla bile mutlu eder...<br>
+      Sen de onlardan birisin. Hayatına dokunabildiğim için şanslıyım.<br>
+      Nice güzel yılların olsun!
+    </div>
+    <button class="btn" onclick="showVideo()">Sürprize Geç 🎁</button>
+  </div>
 
-    <section id="featured" class="featured-news">
-      <h2>Öne Çıkan Haberler</h2>
-      <div class="news-grid">
-        <article>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBq5BlAk8T7O64Ablx5Fnelhf8hBV2LNR3g&s">
-          <h3><a href="#">Yanlız Değilmiyiz</a></h3>
-          <p>Dünya Dışında Yaşam Var mı?</p>
-        </article>
-        <article>
-          <img src="https://source.unsplash.com/random/400x300?economy" alt="Haber 2">
-          <h3><a href="#">Haber Başlığı 2</a></h3>
-          <p>Ekonomi haberleri ve analizler...</p>
-        </article>
-        <article>
-          <img src="https://source.unsplash.com/random/400x300?technology" alt="Haber 3">
-          <h3><a href="#">Haber Başlığı 3</a></h3>
-          <p>Teknoloji dünyasında son yenilikler...</p>
-        </article>
-      </div>
-    </section>
+  <div class="hearts" id="heartContainer"></div>
 
-    <section class="latest-news">
-      <h2>Son Haberler</h2>
-      <ul>
-        <li><a href="#">Yeni bir keşif: Uzayda yaşam izleri bulundu.</a></li>
-        <li><a href="#">Borsa dalgalanmaları: Yatırımcılar ne yapmalı?</a></li>
-        <li><a href="#">Yapay zeka nereye gidiyor? Geleceğe dair öngörüler.</a></li>
-        <li><a href="#">Futbol dünyasında transfer dönemi başladı.</a></li>
-      </ul>
-    </section>
-  </main>
+  <div class="container" id="videoPage">
+    <h1>✨ En değerli dostuma  iyiki doğdun ece✨</h1>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/Iuei_ul8QBI" allowfullscreen></iframe>
+    </div>
+    <div class="video-message">
+      Bir yıldız gibi parladığın,
+ve bazen gecenin karanlığında kaybolduğun anlar olacak...
+Ama bil ki, sen hep bir yıldızsın benim için.
+Işığın azalsa da, yolun sarsılsa da
+ben hep senin yanında olacağım dostum.
+İyi ki doğdun, iyi ki varsın. 💫
+    </div>
+  </div>
 
-  <footer>
-    <p>© 2025 WorldWeb. Tüm hakları saklıdır. | <a href="#">Gizlilik Politikası</a></p>
-  </footer>
+  <script>
+    function showVideo() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('videoPage').style.display = 'flex';
+    }
+
+    // Kalp efektleri (hafifletilmiş)
+    let heartLimit = 20;
+    function createHeart() {
+      if (document.querySelectorAll('.heart').length >= heartLimit) return;
+
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.style.background = ['#ff5e78', '#ff8e53', '#ffcc5c'][Math.floor(Math.random() * 3)];
+      heart.style.width = heart.style.height = Math.random() * 20 + 10 + 'px';
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+
+      document.getElementById('heartContainer').appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(createHeart, 900);
+  </script>
 </body>
 </html>
