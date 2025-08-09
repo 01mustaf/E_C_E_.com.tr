@@ -49,6 +49,7 @@
       border-radius: 30px;
       cursor: pointer;
       transition: transform 0.3s ease, background 0.3s ease;
+      margin-top: 15px;
     }
     .btn:hover {
       background: #e14d80;
@@ -152,6 +153,40 @@
       max-width: 600px;
       text-shadow: 1px 1px 3px #000;
     }
+
+    /* 3. Sayfa - Mektup */
+    #letterPage {
+      display: none;
+      min-height: 100vh;
+      padding: 60px 20px;
+      background: #f5f1e9;
+      background-image:
+        linear-gradient(rgba(245, 241, 233, 0.9), rgba(245, 241, 233, 0.9)),
+        url('https://i.ibb.co/yqF64Sz/old-paper-texture.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      color: #5b4636;
+      font-family: 'Segoe Script', cursive, 'Georgia', serif;
+      text-align: left;
+      box-sizing: border-box;
+    }
+    .letter-box {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(255, 255, 240, 0.85);
+      padding: 40px 50px;
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(101, 67, 33, 0.4);
+      border: 3px solid #c7a17a;
+      font-size: 1.3em;
+      line-height: 1.8em;
+      white-space: pre-line;
+      position: relative;
+      font-family: 'Segoe Script', cursive, 'Georgia', serif;
+      user-select: text;
+    }
+
   </style>
 </head>
 <body>
@@ -168,17 +203,35 @@
   <div class="hearts" id="heartContainer"></div>
 
   <div class="container" id="videoPage">
-    <h1>✨ En değerli dostuma  iyiki doğdun ece✨</h1>
+    <h1>✨ En değerli dostuma iyi ki doğdun Ece ✨</h1>
     <div class="video-wrapper">
       <iframe src="https://www.youtube.com/embed/Iuei_ul8QBI" allowfullscreen></iframe>
     </div>
     <div class="video-message">
-      Bir yıldız gibi parladığın,
-ve bazen gecenin karanlığında kaybolduğun anlar olacak...
-Ama bil ki, sen hep bir yıldızsın benim için.
-Işığın azalsa da, yolun sarsılsa da
-ben hep senin yanında olacağım dostum.
-İyi ki doğdun, iyi ki varsın. 💫
+      Bir yıldız gibi parladığın,<br>
+      ve bazen gecenin karanlığında kaybolduğun anlar olacak...<br>
+      Ama bil ki, sen hep bir yıldızsın benim için.<br>
+      Işığın azalsa da, yolun sarsılsa da<br>
+      ben hep senin yanında olacağım dostum.<br>
+      İyi ki doğdun, iyi ki varsın. 💫
+    </div>
+    <button class="btn" onclick="showLetter()">Mektup ✉️</button>
+  </div>
+
+  <div id="letterPage">
+    <div class="letter-box">
+Sevgili Ece,
+
+Biliyorum, bugün yanında değilim. Belki aynı masada oturup kahve içemeyeceğiz, aynı şehirde yürüyemeyeceğiz… ama bil ki kalbim, bugünün her saniyesinde seninle.
+
+Hayatta bazı insanlar vardır, yanındayken zamanın nasıl geçtiğini anlamazsın; uzaklaşsan bile hissettirdikleri hiç değişmez. Sen o insanlardansın.
+
+Unutma; bir yıldız gibi parlasan da, bazen karanlıkta kaybolsan da, ben hep orada olacağım. Çünkü gerçek dostluk, mesafe tanımaz.
+
+Doğum günün kutlu olsun Ece. 🎂💫  
+Nice mutlu, sağlıklı ve bol kahkahalı yıllara…
+
+Mustafa
     </div>
   </div>
 
@@ -187,8 +240,12 @@ ben hep senin yanında olacağım dostum.
       document.getElementById('homePage').style.display = 'none';
       document.getElementById('videoPage').style.display = 'flex';
     }
+    function showLetter() {
+      document.getElementById('videoPage').style.display = 'none';
+      document.getElementById('letterPage').style.display = 'block';
+    }
 
-    // Kalp efektleri (hafifletilmiş)
+    // Kalp efektleri
     let heartLimit = 20;
     function createHeart() {
       if (document.querySelectorAll('.heart').length >= heartLimit) return;
@@ -206,7 +263,6 @@ ben hep senin yanında olacağım dostum.
         heart.remove();
       }, 7000);
     }
-
     setInterval(createHeart, 900);
   </script>
 </body>
