@@ -64,38 +64,18 @@
       pointer-events: none;
       z-index: 0;
     }
-    .heart {
-      width: 15px;
-      height: 15px;
-      background: red;
+    .emoji-heart {
       position: absolute;
-      transform: rotate(45deg);
+      font-size: 24px;
       animation: float 6s linear infinite;
-    }
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 15px;
-      height: 15px;
-      background: red;
-      border-radius: 50%;
-      position: absolute;
-    }
-    .heart::before {
-      top: -7.5px;
-      left: 0;
-    }
-    .heart::after {
-      left: -7.5px;
-      top: 0;
     }
     @keyframes float {
       0% {
-        transform: translateY(0) rotate(45deg);
+        transform: translateY(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(-100vh) rotate(45deg);
+        transform: translateY(-100vh);
         opacity: 0;
       }
     }
@@ -119,28 +99,6 @@
       border: 4px double #ff69b4;
       box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
     }
-    .video-wrapper::before, .video-wrapper::after {
-      content: '';
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background: #ff69b4;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #fff;
-      animation: sparkle 2s infinite alternate;
-    }
-    .video-wrapper::before {
-      top: -15px;
-      left: -15px;
-    }
-    .video-wrapper::after {
-      bottom: -15px;
-      right: -15px;
-    }
-    @keyframes sparkle {
-      from { transform: scale(1); opacity: 0.7; }
-      to { transform: scale(1.3); opacity: 1; }
-    }
     .video-wrapper iframe {
       width: 100%;
       height: 450px;
@@ -153,40 +111,53 @@
       max-width: 600px;
       text-shadow: 1px 1px 3px #000;
     }
-
-    /* 3. Sayfa - Mektup */
     #letterPage {
       display: none;
       min-height: 100vh;
       padding: 60px 20px;
-      background: #f5f1e9;
-      background-image:
-        linear-gradient(rgba(245, 241, 233, 0.9), rgba(245, 241, 233, 0.9)),
-        url('https://i.ibb.co/yqF64Sz/old-paper-texture.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      color: #5b4636;
-      font-family: 'Segoe Script', cursive, 'Georgia', serif;
+      background: linear-gradient(145deg, #000000, #1a001a);
+      color: white;
+      font-family: 'Georgia', serif;
       text-align: left;
       box-sizing: border-box;
     }
     .letter-box {
       max-width: 700px;
       margin: auto;
-      background: rgba(255, 255, 240, 0.85);
+      background: rgba(255, 255, 255, 0.1);
       padding: 40px 50px;
       border-radius: 25px;
-      box-shadow: 0 0 40px rgba(101, 67, 33, 0.4);
-      border: 3px solid #c7a17a;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
+      border: 3px solid #ff69b4;
       font-size: 1.3em;
       line-height: 1.8em;
       white-space: pre-line;
       position: relative;
-      font-family: 'Segoe Script', cursive, 'Georgia', serif;
       user-select: text;
     }
-
+    /* Müzik Butonu */
+    .music-btn {
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      border: none;
+      padding: 14px 20px;
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+    .music-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+    }
+    .music-btn span {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -197,7 +168,7 @@
       Sen de onlardan birisin. Hayatına dokunabildiğim için şanslıyım.<br>
       Nice güzel yılların olsun!
     </div>
-    <button class="btn" onclick="showVideo()">Sürprize Geç 🎁</button>
+    <button class="btn" onclick="startSurprise()">Sürprize Geç 🎁</button>
   </div>
 
   <div class="hearts" id="heartContainer"></div>
@@ -216,6 +187,7 @@
       İyi ki doğdun, iyi ki varsın. 💫
     </div>
     <button class="btn" onclick="showLetter()">Mektup ✉️</button>
+    <button class="music-btn" onclick="toggleMusic()">🎵 <span>Müzik Aç/Kapat</span></button>
   </div>
 
   <div id="letterPage">
@@ -233,37 +205,47 @@ Nice mutlu, sağlıklı ve bol kahkahalı yıllara…
 
 Mustafa
     </div>
+    <button class="music-btn" onclick="toggleMusic()">🎵 <span>Müzik Aç/Kapat</span></button>
   </div>
 
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    function showVideo() {
+    const bgMusic = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    function startSurprise() {
       document.getElementById('homePage').style.display = 'none';
       document.getElementById('videoPage').style.display = 'flex';
+      bgMusic.play();
+      isPlaying = true;
     }
     function showLetter() {
       document.getElementById('videoPage').style.display = 'none';
       document.getElementById('letterPage').style.display = 'block';
     }
-
-    // Kalp efektleri
-    let heartLimit = 20;
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+      } else {
+        bgMusic.play();
+      }
+      isPlaying = !isPlaying;
+    }
     function createHeart() {
-      if (document.querySelectorAll('.heart').length >= heartLimit) return;
-
       const heart = document.createElement('div');
-      heart.className = 'heart';
+      heart.className = 'emoji-heart';
+      heart.textContent = '💖';
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.top = '100vh';
-      heart.style.background = ['#ff5e78', '#ff8e53', '#ffcc5c'][Math.floor(Math.random() * 3)];
-      heart.style.width = heart.style.height = Math.random() * 20 + 10 + 'px';
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
       heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-
       document.getElementById('heartContainer').appendChild(heart);
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
+      setTimeout(() => heart.remove(), 7000);
     }
-    setInterval(createHeart, 900);
+    setInterval(createHeart, 300);
   </script>
 </body>
 </html>
