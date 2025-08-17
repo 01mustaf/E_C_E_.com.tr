@@ -1,251 +1,367 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>İyi ki Doğdun Ece 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #fccde2);
-      color: #333;
-      text-align: center;
-    }
-    .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1;
-    }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-      color: #e60073;
-      text-shadow: 1px 1px 2px #fff;
-    }
-    .message {
-      font-size: 1.4em;
-      max-width: 600px;
-      margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.7);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255, 0, 98, 0.2);
-      border: 2px dashed #ff6fa1;
-    }
-    .btn {
-      background: #ff6fa1;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      color: white;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-      margin-top: 15px;
-    }
-    .btn:hover {
-      background: #e14d80;
-      transform: scale(1.05);
-    }
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .emoji-heart {
-      position: absolute;
-      font-size: 24px;
-      animation: float 6s linear infinite;
-    }
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh);
-        opacity: 0;
-      }
-    }
-    #videoPage {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, #000000, #1a001a);
-      min-height: 100vh;
-      color: white;
-      padding: 30px;
-    }
-    .video-wrapper {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      border: 4px double #ff69b4;
-      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
-    }
-    .video-wrapper iframe {
-      width: 100%;
-      height: 450px;
-      border-radius: 15px;
-      border: none;
-    }
-    .video-message {
-      margin-top: 30px;
-      font-size: 1.2em;
-      max-width: 600px;
-      text-shadow: 1px 1px 3px #000;
-    }
-    #letterPage {
-      display: none;
-      min-height: 100vh;
-      padding: 60px 20px;
-      background: linear-gradient(145deg, #000000, #1a001a);
-      color: white;
-      font-family: 'Georgia', serif;
-      text-align: left;
-      box-sizing: border-box;
-    }
-    .letter-box {
-      max-width: 700px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 40px 50px;
-      border-radius: 25px;
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
-      border: 3px solid #ff69b4;
-      font-size: 1.3em;
-      line-height: 1.8em;
-      white-space: pre-line;
-      position: relative;
-      user-select: text;
-    }
-    /* Müzik Butonu */
-    .music-btn {
-      background: linear-gradient(135deg, #ff69b4, #ff1493);
-      border: none;
-      padding: 14px 20px;
-      border-radius: 50px;
-      color: white;
-      cursor: pointer;
-      font-size: 1.1em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
-      transition: all 0.3s ease;
-      margin-top: 20px;
-    }
-    .music-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
-    }
-    .music-btn span {
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <div class="container" id="homePage">
-    <h1>İyi ki Doğdun Ece 🎉</h1>
-    <div class="message">
-      Ece, bazen bazı insanlar olur, seni sadece varlıklarıyla bile mutlu eder...<br>
-      Sen de onlardan birisin. Hayatına dokunabildiğim için şanslıyım.<br>
-      Nice güzel yılların olsun!
-    </div>
-    <button class="btn" onclick="startSurprise()">Sürprize Geç 🎁</button>
-  </div>
-
-  <div class="hearts" id="heartContainer"></div>
-
-  <div class="container" id="videoPage">
-    <h1>✨ En değerli dostuma iyi ki doğdun Ece ✨</h1>
-    <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/Iuei_ul8QBI" allowfullscreen></iframe>
-    </div>
-    <div class="video-message">
-      Bir yıldız gibi parladığın,<br>
-      ve bazen gecenin karanlığında kaybolduğun anlar olacak...<br>
-      Ama bil ki, sen hep bir yıldızsın benim için.<br>
-      Işığın azalsa da, yolun sarsılsa da<br>
-      ben hep senin yanında olacağım dostum.<br>
-      İyi ki doğdun, iyi ki varsın. 💫
-    </div>
-    <button class="btn" onclick="showLetter()">Mektup ✉️</button>
-    <button class="music-btn" onclick="toggleMusic()">🎵 <span>Müzik Aç/Kapat</span></button>
-  </div>
-
-  <div id="letterPage">
-    <div class="letter-box">
-Sevgili Ece,
-
-Biliyorum, bugün yanında değilim. Belki aynı masada oturup kahve içemeyeceğiz, aynı şehirde yürüyemeyeceğiz… ama bil ki kalbim, bugünün her saniyesinde seninle.
+<!DOCTYPE html>  <html lang="tr">  
+<head>  
+<meta charset="UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+<title>İyi ki Doğdun Ece 🎉</title>  
+<style>  
+  body {  
+    margin: 0;  
+    padding: 0;  
+    overflow-x: hidden;  
+    font-family: 'Georgia', serif;  
+    background: linear-gradient(135deg, #ffdde1, #fccde2);  
+    color: #333;  
+    text-align: center;  
+  }  
+  .container {  
+    min-height: 100vh;  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;  
+    padding: 40px 20px;  
+    position: relative;  
+    z-index: 1;  
+  }  
+  h1 {  
+    font-size: 3em;  
+    margin-bottom: 20px;  
+    color: #e60073;  
+    text-shadow: 1px 1px 2px #fff;  
+  }  
+  /* Süslü çerçeve */  
+  .message {  
+    font-size: 1.4em;  
+    max-width: 600px;  
+    margin-bottom: 40px;  
+    background: rgba(255, 255, 255, 0.7);  
+    padding: 20px;  
+    border-radius: 20px;  
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5), 0 0 15px rgba(255, 192, 203, 0.7) inset;  
+    border: 6px double #ff4da6;  
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,240,245,0.95));  
+  }  
+  /* Geri sayım */  
+  #countdown {  
+    font-size: 2em;  
+    font-weight: bold;  
+    color: #e60073;  
+    text-shadow: 1px 1px 5px #ff4da6;  
+    margin-bottom: 20px;  
+    padding: 10px 20px;  
+    border: 3px solid #ff4da6;  
+    border-radius: 15px;  
+    background: rgba(255, 255, 255, 0.6);  
+    display: inline-block;  
+  }  
+  .btn {  
+    background: #ff6fa1;  
+    border: none;  
+    padding: 15px 30px;  
+    font-size: 1.2em;  
+    color: white;  
+    border-radius: 30px;  
+    cursor: pointer;  
+    transition: transform 0.3s ease, background 0.3s ease;  
+    margin-top: 15px;  
+  }  
+  .btn:hover {  
+    background: #e14d80;  
+    transform: scale(1.05);  
+  }  
+  .hearts {  
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 100%;  
+    pointer-events: none;  
+    z-index: 0;  
+  }  
+  .emoji-heart {  
+    position: absolute;  
+    font-size: 28px;  
+    animation: float 6s linear infinite;  
+    filter: drop-shadow(0 0 5px #ff69b4);  
+  }  
+  @keyframes float {  
+    0% { transform: translateY(0); opacity: 1; }  
+    100% { transform: translateY(-100vh); opacity: 0; }  
+  }  
+  #videoPage, #gamePage {  
+    display: none;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    min-height: 100vh;  
+    padding: 30px;  
+  }  
+  #videoPage {  
+    background: linear-gradient(145deg, #000000, #1a001a);  
+    color: white;  
+  }  
+  .video-wrapper {  
+    position: relative;  
+    width: 90%;  
+    max-width: 800px;  
+    padding: 20px;  
+    background: rgba(255, 255, 255, 0.1);  
+    border-radius: 20px;  
+    border: 4px double #ff4da6;  
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);  
+  }  
+  .video-wrapper iframe {  
+    width: 100%;  
+    height: 450px;  
+    border-radius: 15px;  
+    border: none;  
+  }  
+  .video-message {  
+    margin-top: 30px;  
+    font-size: 1.2em;  
+    max-width: 600px;  
+    text-shadow: 1px 1px 3px #000;  
+    background: rgba(255, 255, 255, 0.1);  
+    padding: 20px;  
+    border-radius: 15px;  
+    border: 3px solid #ff4da6;  
+  }  
+  #letterPage {  
+    display: none;  
+    min-height: 100vh;  
+    padding: 60px 20px;  
+    background: linear-gradient(145deg, #000000, #1a001a);  
+    color: white;  
+    font-family: 'Georgia', serif;  
+    text-align: left;  
+    box-sizing: border-box;  
+  }  
+  .letter-box {  
+    max-width: 700px;  
+    margin: auto;  
+    background: rgba(255, 255, 255, 0.1);  
+    padding: 40px 50px;  
+    border-radius: 25px;  
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);  
+    border: 3px solid #ff4da6;  
+    font-size: 1.3em;  
+    line-height: 1.8em;  
+    white-space: pre-line;  
+    position: relative;  
+    user-select: text;  
+  }  
+  .music-btn {  
+    background: linear-gradient(135deg, #ff69b4, #ff1493);  
+    border: none;  
+    padding: 14px 20px;  
+    border-radius: 50px;  
+    color: white;  
+    cursor: pointer;  
+    font-size: 1.1em;  
+    display: flex;  
+    align-items: center;  
+    gap: 8px;  
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);  
+    transition: all 0.3s ease;  
+    margin-top: 20px;  
+  }  
+  .music-btn:hover {  
+    transform: scale(1.08);  
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);  
+  }  
+  #gamePage {  
+    background: linear-gradient(135deg, #4b0019, #1a0010);  
+    color: #fff;  
+    font-size: 2em;  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  #score {  
+    position: absolute;  
+    top: 20px;  
+    right: 20px;  
+    background: rgba(0,0,0,0.4);  
+    padding: 10px 20px;  
+    border-radius: 15px;  
+    font-size: 1.2em;  
+    font-weight: bold;  
+    color: #ff6fa1;  
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);  
+  }  
+  .heart {  
+    position: absolute;  
+    font-size: 50px;  
+    cursor: pointer;  
+    user-select: none;  
+    z-index: 10;  
+  }  
+</style>  
+</head>  
+<body>  
+<div class="container" id="homePage">  
+  <h1>İyi ki Doğdun Ece 🎉</h1>  
+  <div id="countdown">Yükleniyor...</div>  
+  <div class="message">  
+    Ece, bazen bazı insanlar olur, seni sadece varlıklarıyla bile mutlu eder...<br>  
+    Sen de onlardan birisin. Hayatına dokunabildiğim için şanslıyım.<br>  
+    Nice güzel yılların olsun!  
+  </div>  
+  <button class="btn" onclick="startSurprise()">Sürprize Geç 🎁</button>  
+</div>  <div class="hearts" id="heartContainer"></div>  <div class="container" id="videoPage">  
+  <h1>✨ En değerli dostuma iyi ki doğdun Ece ✨</h1>  
+  <div class="video-wrapper">  
+    <iframe src="https://www.youtube.com/embed/Iuei_ul8QBI" allowfullscreen></iframe>  
+  </div>  
+  <div class="video-message">  
+    Bir yıldız gibi parladığın,<br>  
+    ve bazen gecenin karanlığında kaybolduğun anlar olacak...<br>  
+    Ama bil ki, sen hep bir yıldızsın benim için.<br>  
+    Işığın azalsa da, yolun sarsılsa da<br>  
+    ben hep senin yanında olacağım dostum.<br>  
+    İyi ki doğdun, iyi ki varsın. 💫  
+  </div>  
+  <button class="btn" onclick="startGame()">Oyuna Geç 🎯</button>  
+  <button class="music-btn" onclick="toggleMusic()">🎧</button>  
+</div>  <div class="container" id="gamePage">  
+  <div id="score">Skor: 0</div>  
+</div>  <div id="letterPage">  
+  <div class="letter-box">  
+Sevgili Ece,  Biliyorum, bugün yanında değilim. Belki aynı masada oturup kahve içemeyeceğiz, aynı şehirde yürüyemeyeceğiz… ama bil ki kalbim, bugünün her saniyesinde seninle.
 
 Hayatta bazı insanlar vardır, yanındayken zamanın nasıl geçtiğini anlamazsın; uzaklaşsan bile hissettirdikleri hiç değişmez. Sen o insanlardansın.
 
 Unutma; bir yıldız gibi parlasan da, bazen karanlıkta kaybolsan da, ben hep orada olacağım. Çünkü gerçek dostluk, mesafe tanımaz.
 
-Doğum günün kutlu olsun Ece. 🎂💫  
+Doğum günün kutlu olsun Ece. 🎂💫
 Nice mutlu, sağlıklı ve bol kahkahalı yıllara…
 
 Mustafa
-    </div>
-    <button class="music-btn" onclick="toggleMusic()">🎵 <span>Müzik Aç/Kapat</span></button>
-  </div>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const bgMusic = document.getElementById("bgMusic");
-    let isPlaying = false;
-
-    function startSurprise() {
-      document.getElementById('homePage').style.display = 'none';
-      document.getElementById('videoPage').style.display = 'flex';
-      bgMusic.play();
-      isPlaying = true;
-    }
-    function showLetter() {
-      document.getElementById('videoPage').style.display = 'none';
-      document.getElementById('letterPage').style.display = 'block';
-    }
-    function toggleMusic() {
-      if (isPlaying) {
-        bgMusic.pause();
-      } else {
-        bgMusic.play();
-      }
-      isPlaying = !isPlaying;
-    }
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'emoji-heart';
-      heart.textContent = '💖';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = '100vh';
-      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-      document.getElementById('heartContainer').appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
-    }
-    setInterval(createHeart, 300);
-  </script>
-</body>
-</html>
+  </div>  
+  <button class="music-btn" onclick="toggleMusic()">🎧</button>  
+</div>  <audio id="bgMusic" loop>  
+  <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">  
+</audio>  <script>  
+  const bgMusic = document.getElementById("bgMusic");  
+  let isPlaying = false;  
+  let score = 0;  
+  let gameInterval;  
+  
+  // Geri sayım  
+  const targetDate = new Date("August 19, 2025 15:58:00").getTime();  
+  const countdownEl = document.getElementById("countdown");  
+  
+  setInterval(() => {  
+    const now = new Date().getTime();  
+    const distance = targetDate - now;  
+  
+    if (distance <= 0) {  
+      countdownEl.innerHTML = "🎉 Zaman Geldi 🎉";  
+      return;  
+    }  
+  
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));  
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));  
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));  
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);  
+  
+    countdownEl.innerHTML = `${days}g ${hours}sa ${minutes}dk ${seconds}sn`;  
+  }, 1000);  
+  
+  function startSurprise() {  
+    document.getElementById('homePage').style.display = 'none';  
+    document.getElementById('videoPage').style.display = 'flex';  
+    bgMusic.play();  
+    isPlaying = true;  
+  }  
+  function startGame() {  
+    document.getElementById('videoPage').style.display = 'none';  
+    document.getElementById('gamePage').style.display = 'flex';  
+    document.getElementById('heartContainer').style.display = 'none';  
+    score = 0;  
+    document.getElementById("score").innerText = "Skor: 0";  
+    gameInterval = setInterval(spawnHeart, 900);  
+  }  
+  function spawnHeart() {  
+    const gameArea = document.getElementById('gamePage');  
+    const heart = document.createElement('div');  
+    heart.className = 'heart';  
+    heart.textContent = '🥳';  
+    heart.style.left = Math.random() * (gameArea.clientWidth - 130) + 'px';  
+    heart.style.top = gameArea.clientHeight + 'px';  
+    gameArea.appendChild(heart);  
+  
+    heart.addEventListener('click', () => {  
+      score++;  
+      document.getElementById("score").innerText = "Skor: " + score;  
+      heart.remove();  
+      confetti();  
+      if (score >= 20) {  
+        endGame();  
+      }  
+    });  
+  
+    let pos = gameArea.clientHeight;  
+    const move = setInterval(() => {  
+      if (pos < -60) {  
+        heart.remove();  
+        clearInterval(move);  
+      } else {  
+        pos -= 5;  
+        heart.style.top = pos + 'px';  
+      }  
+    }, 20);  
+  }  
+  function endGame() {  
+    clearInterval(gameInterval);  
+    document.getElementById('gamePage').style.display = 'none';  
+    document.getElementById('letterPage').style.display = 'block';  
+    document.getElementById('heartContainer').style.display = 'block';  
+    confetti();  
+  }  
+  function toggleMusic() {  
+    if (isPlaying) {  
+      bgMusic.pause();  
+    } else {  
+      bgMusic.play();  
+    }  
+    isPlaying = !isPlaying;  
+  }  
+  function createHeart() {  
+    const heart = document.createElement('div');  
+    heart.className = 'emoji-heart';  
+    heart.textContent = '✨💖✨';  
+    heart.style.left = Math.random() * 100 + 'vw';  
+    heart.style.top = '100vh';  
+    heart.style.fontSize = (Math.random() * 20 + 30) + 'px';  
+    heart.style.animationDuration = Math.random() * 3 + 4 + 's';  
+    document.getElementById('heartContainer').appendChild(heart);  
+    setTimeout(() => heart.remove(), 7000);  
+  }  
+  setInterval(createHeart, 200);  
+  
+  function confetti() {  
+    const duration = 1000;  
+    const animationEnd = Date.now() + duration;  
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };  
+  
+    function randomInRange(min, max) {  
+      return Math.random() * (max - min) + min;  
+    }  
+  
+    (function frame() {  
+      const timeLeft = animationEnd - Date.now();  
+      if (timeLeft <= 0) return;  
+  
+      const particleCount = 50 * (timeLeft / duration);  
+      confettiLib(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));  
+      requestAnimationFrame(frame);  
+    })();  
+  }  
+  
+  // Konfeti kütüphanesi  
+  const confettiScript = document.createElement("script");  
+  confettiScript.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";  
+  document.head.appendChild(confettiScript);  
+</script>  </body>  
+</html>  
